@@ -13,6 +13,7 @@ assistant_token = os.environ.get('ASSISTANT_TOKEN')
 director_token = os.environ.get('DIRECTOR_TOKEN')
 producer_token = os.environ.get('PRODUCER_TOKEN')
 
+
 class TestCase(unittest.TestCase):
 
     def setUp(self):
@@ -30,7 +31,6 @@ class TestCase(unittest.TestCase):
             self.db = SQLAlchemy()
             self.db.init_app(self.app)
             db_drop_and_create_all()
-
 
         self.assistant_jwt = {
             'Content-Type': 'application/json',
@@ -75,11 +75,9 @@ class TestCase(unittest.TestCase):
             'name': 'Sammy E',
         }
 
-
     def tearDown(self):
         """Executed after reach test"""
         pass
-
 
     def test_get_health(self):
         res = self.client().get('/')
@@ -89,7 +87,7 @@ class TestCase(unittest.TestCase):
         self.assertEqual(data['success'], True)
         self.assertEqual(data['message'], "Healthy")
 
-    #Assistant
+    # Assistant
 
     def test_assistant_get_movies(self):
         res = self.client().get('/movies', headers=self.assistant_jwt)
@@ -108,7 +106,9 @@ class TestCase(unittest.TestCase):
         self.assertEqual(type(data['actors']), list)
 
     def test_assistent_post_movie(self):
-        res = self.client().post('/movies', headers=self.assistant_jwt, json=self.new_movie)
+        res = self.client().post(
+            '/movies', headers=self.assistant_jwt, json=self.new_movie
+            )
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 401)
@@ -116,7 +116,9 @@ class TestCase(unittest.TestCase):
         self.assertTrue(data['message'], 'Permission not found.')
 
     def test_assistent_post_actor(self):
-        res = self.client().post('/actors', headers=self.assistant_jwt, json=self.new_actor)
+        res = self.client().post(
+            '/actors', headers=self.assistant_jwt, json=self.new_actor
+            )
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 401)
@@ -124,7 +126,9 @@ class TestCase(unittest.TestCase):
         self.assertTrue(data['message'], 'Permission not found.')
 
     def test_assistent_patch_movie(self):
-        res = self.client().patch('/movies/1', headers=self.assistant_jwt, json=self.new_title)
+        res = self.client().patch(
+            '/movies/1', headers=self.assistant_jwt, json=self.new_title
+            )
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 401)
@@ -132,7 +136,9 @@ class TestCase(unittest.TestCase):
         self.assertTrue(data['message'], 'Permission not found.')
 
     def test_assistent_patch_actor(self):
-        res = self.client().patch('/actors/1', headers=self.assistant_jwt, json=self.new_name)
+        res = self.client().patch(
+            '/actors/1', headers=self.assistant_jwt, json=self.new_name
+            )
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 401)
@@ -155,7 +161,7 @@ class TestCase(unittest.TestCase):
         self.assertEqual(data['success'], False)
         self.assertTrue(data['message'], 'Permission not found.')
 
-    #Director
+    # Director
 
     def test_director_get_movies(self):
         res = self.client().get('/movies', headers=self.director_jwt)
@@ -174,7 +180,9 @@ class TestCase(unittest.TestCase):
         self.assertEqual(type(data['actors']), list)
 
     def test_director_post_movie(self):
-        res = self.client().post('/movies', headers=self.director_jwt, json=self.new_movie)
+        res = self.client().post(
+            '/movies', headers=self.director_jwt, json=self.new_movie
+            )
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 401)
@@ -182,7 +190,9 @@ class TestCase(unittest.TestCase):
         self.assertTrue(data['message'], 'Permission not found.')
 
     def test_director_post_actor(self):
-        res = self.client().post('/actors', headers=self.director_jwt, json=self.new_actor)
+        res = self.client().post(
+            '/actors', headers=self.director_jwt, json=self.new_actor
+            )
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -190,10 +200,14 @@ class TestCase(unittest.TestCase):
         self.assertTrue(data['actor'])
 
     def test_director_patch_movie(self):
-        res = self.client().post('/movies', headers=self.producer_jwt, json=self.new_movie)
+        res = self.client().post(
+            '/movies', headers=self.producer_jwt, json=self.new_movie
+            )
         data = json.loads(res.data)
 
-        res = self.client().patch('/movies/1', headers=self.director_jwt, json=self.new_title)
+        res = self.client().patch(
+            '/movies/1', headers=self.director_jwt, json=self.new_title
+            )
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -201,10 +215,14 @@ class TestCase(unittest.TestCase):
         self.assertTrue(data['movie'])
 
     def test_director_patch_actor(self):
-        res = self.client().post('/actors', headers=self.director_jwt, json=self.new_actor)
+        res = self.client().post(
+            '/actors', headers=self.director_jwt, json=self.new_actor
+            )
         data = json.loads(res.data)
 
-        res = self.client().patch('/actors/1', headers=self.director_jwt, json=self.new_name)
+        res = self.client().patch(
+            '/actors/1', headers=self.director_jwt, json=self.new_name
+            )
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -220,7 +238,9 @@ class TestCase(unittest.TestCase):
         self.assertTrue(data['message'], 'Permission not found.')
 
     def test_director_delete_actor(self):
-        res = self.client().post('/actors', headers=self.director_jwt, json=self.new_actor)
+        res = self.client().post(
+            '/actors', headers=self.director_jwt, json=self.new_actor
+            )
         data = json.loads(res.data)
 
         res = self.client().delete('/actors/1', headers=self.director_jwt)
@@ -230,7 +250,7 @@ class TestCase(unittest.TestCase):
         self.assertEqual(data['success'], True)
         self.assertTrue(data['delete'])
 
-    #Producer
+    # Producer
 
     def test_producer_get_movies(self):
         res = self.client().get('/movies', headers=self.producer_jwt)
@@ -249,7 +269,9 @@ class TestCase(unittest.TestCase):
         self.assertEqual(type(data['actors']), list)
 
     def test_producer_post_movie(self):
-        res = self.client().post('/movies', headers=self.producer_jwt, json=self.new_movie)
+        res = self.client().post(
+            '/movies', headers=self.producer_jwt, json=self.new_movie
+            )
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -257,7 +279,9 @@ class TestCase(unittest.TestCase):
         self.assertTrue(data['movie'])
 
     def test_producer_post_actor(self):
-        res = self.client().post('/actors', headers=self.producer_jwt, json=self.new_actor)
+        res = self.client().post(
+            '/actors', headers=self.producer_jwt, json=self.new_actor
+            )
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -265,10 +289,14 @@ class TestCase(unittest.TestCase):
         self.assertTrue(data['actor'])
 
     def test_producer_patch_movie(self):
-        res = self.client().post('/movies', headers=self.producer_jwt, json=self.new_movie)
+        res = self.client().post(
+            '/movies', headers=self.producer_jwt, json=self.new_movie
+            )
         data = json.loads(res.data)
 
-        res = self.client().patch('/movies/1', headers=self.producer_jwt, json=self.new_title)
+        res = self.client().patch(
+            '/movies/1', headers=self.producer_jwt, json=self.new_title
+            )
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -276,10 +304,14 @@ class TestCase(unittest.TestCase):
         self.assertTrue(data['movie'])
 
     def test_producer_patch_actor(self):
-        res = self.client().post('/actors', headers=self.producer_jwt, json=self.new_actor)
+        res = self.client().post(
+            '/actors', headers=self.producer_jwt, json=self.new_actor
+            )
         data = json.loads(res.data)
 
-        res = self.client().patch('/actors/1', headers=self.producer_jwt, json=self.new_name)
+        res = self.client().patch(
+            '/actors/1', headers=self.producer_jwt, json=self.new_name
+            )
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -287,7 +319,9 @@ class TestCase(unittest.TestCase):
         self.assertTrue(data['actor'])
 
     def test_producer_delete_movie(self):
-        res = self.client().post('/movies', headers=self.producer_jwt, json=self.new_movie)
+        res = self.client().post(
+            '/movies', headers=self.producer_jwt, json=self.new_movie
+            )
         data = json.loads(res.data)
 
         res = self.client().delete('/movies/1', headers=self.producer_jwt)
@@ -298,7 +332,9 @@ class TestCase(unittest.TestCase):
         self.assertTrue(data['delete'])
 
     def test_producer_delete_actor(self):
-        res = self.client().post('/actors', headers=self.producer_jwt, json=self.new_actor)
+        res = self.client().post(
+            '/actors', headers=self.producer_jwt, json=self.new_actor
+            )
         data = json.loads(res.data)
 
         res = self.client().delete('/actors/1', headers=self.producer_jwt)
@@ -308,7 +344,7 @@ class TestCase(unittest.TestCase):
         self.assertEqual(data['success'], True)
         self.assertTrue(data['delete'])
 
-    #Error behavior of endpoints
+    # Error behavior of endpoints
 
     def test_movies_405_invalid_method(self):
         res = self.client().patch('/movies', headers=self.assistant_jwt)
@@ -343,7 +379,9 @@ class TestCase(unittest.TestCase):
         self.assertTrue(data['message'], 'Unprocessable Entity')
 
     def test_movie_400_if_bad_request(self):
-        res = self.client().post('/movies',headers=self.producer_jwt, json=self.new_bad_movie)
+        res = self.client().post(
+            '/movies', headers=self.producer_jwt, json=self.new_bad_movie
+            )
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 400)
@@ -351,7 +389,9 @@ class TestCase(unittest.TestCase):
         self.assertTrue(data['message'], 'Bad Request')
 
     def test_actor_400_if_bad_request(self):
-        res = self.client().post('/actors',headers=self.producer_jwt, json=self.new_bad_actor)
+        res = self.client().post(
+            '/actors', headers=self.producer_jwt, json=self.new_bad_actor
+            )
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 400)
@@ -359,7 +399,9 @@ class TestCase(unittest.TestCase):
         self.assertTrue(data['message'], 'Bad Request')
 
     def test_movie_422_if_movie_is_none(self):
-        res = self.client().patch('/movies/100', headers=self.producer_jwt, json=self.new_title)
+        res = self.client().patch(
+            '/movies/100', headers=self.producer_jwt, json=self.new_title
+            )
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 422)
@@ -367,7 +409,9 @@ class TestCase(unittest.TestCase):
         self.assertTrue(data['message'], 'Unprocessable Entity')
 
     def test_movie_422_if_actor_is_none(self):
-        res = self.client().patch('/actors/100', headers=self.producer_jwt, json=self.new_name)
+        res = self.client().patch(
+            '/actors/100', headers=self.producer_jwt, json=self.new_name
+            )
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 422)
