@@ -5,11 +5,13 @@ from flask_sqlalchemy import SQLAlchemy
 
 from app import create_app
 from models import db_drop_and_create_all, setup_db, Actor, Movie
+from dotenv import load_dotenv
 
-assistant_token = os.environ['ASSISTANT_Token']
-director_token = os.environ['DIRECTOR_TOKEN']
-producer_token = os.environ['PRODUCER_TOKEN']
-database_path = os.environ['DATABASE_URL']
+load_dotenv()
+
+assistant_token = os.environ.get('ASSISTANT_TOKEN')
+director_token = os.environ.get('DIRECTOR_TOKEN')
+producer_token = os.environ.get('PRODUCER_TOKEN')
 
 class TestCase(unittest.TestCase):
 
@@ -17,7 +19,10 @@ class TestCase(unittest.TestCase):
         """Define test variables and initialize app."""
         self.app = create_app()
         self.client = self.app.test_client
-        self.database_path = database_path
+        self.database_name = "casting"
+        self.database_path = "postgresql://{}:{}@{}/{}".format(
+            'postgres', 'admin', 'localhost:5432', self.database_name
+            )
 
         setup_db(self.app, self.database_path)
 
