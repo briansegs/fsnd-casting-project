@@ -2,5 +2,4 @@
 __pycache__
 env
 tokens.py
-setup.sh
 casting.psql
