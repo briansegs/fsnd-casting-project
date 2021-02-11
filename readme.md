@@ -4,6 +4,8 @@
 This is my capstone project for full stack development nanodegree in udacity. The Casting Agency models a company that is responsible for creating movies and managing and assigning actors to those movies.
 you can check it live on **Heroku** [here](https://fsnd-casting-project.herokuapp.com/)
 
+The motivation behind this project is to act as an Executive Producer within this company and create a system to simplify and streamline my process.
+
 ## Getting Started
 
 ### Pre-requisites and Local Development
@@ -28,7 +30,27 @@ pip install -r requirements.txt
 
 This will install all of the required packages we selected within the `requirements.txt` file.
 
+#### Key Dependencies
+
+[Flask](http://flask.pocoo.org/) is a lightweight backend microservices framework. Flask is required to handle requests and responses.
+
+[SQLAlchemy](https://www.sqlalchemy.org/) is the Python SQL toolkit and ORM we'll use handle the lightweight sqlite database. You'll primarily work in app.py and can reference models.py.
+
+[Flask-CORS](https://flask-cors.readthedocs.io/en/latest/#) is the extension we'll use to handle cross origin requests from our frontend server.
+
+
+
 ## Testing
+
+To run the local server
+
+```bash
+export FLASK_APP=app
+export FLASK_DEBUG=true
+export FLASK_ENV=development
+flask run
+
+```
 
 To run the tests, run
 
