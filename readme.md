@@ -1,4 +1,6 @@
-# Full Stack Casting Agency API Capstone Project
+Full Stack Casting Agency API
+
+# Introduction
 
 This Casting Agency API is an artist and movie management tool that gives members of a casting agency different levels of access to information based on their role in the company.
 
