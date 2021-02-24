@@ -1,6 +1,7 @@
-Full Stack Casting Agency API
+# Full Stack Casting Agency API
+-----
 
-# Introduction
+## Introduction
 
 This Casting Agency API is an artist and movie management tool that gives members of a casting agency different levels of access to information based on their role in the company.
 
@@ -8,7 +9,7 @@ For this project, I used Auth0 for role based access control, built out the data
 
 You can see the site live [Here](https://fsnd-casting-project.herokuapp.com/)
 
-# Overview
+## Overview
 
 This API is fully functional and is capable of doing the following:
 
