@@ -1,5 +1,4 @@
 # Full Stack Casting Agency API
------
 
 ## Introduction
 
