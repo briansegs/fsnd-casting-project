@@ -97,7 +97,7 @@ python3 test_app.py
 ### Getting Started
 
 * The backend app is hosted on Heroku at https://fsnd-casting-project.herokuapp.com/
-* All Endpoints require an authentication token except the home endpoint (`/`)
+>**Note** - All Endpoints require an authentication token except the home endpoint (`/`)
 
 ## Error Handling
 
@@ -112,7 +112,7 @@ Errors are returned as JSON objects in the following format:
 
 ## API RBAC
 
-Our API has **3** roles :
+Our API has 3 roles :
 
 1. Casting Assistant
 
