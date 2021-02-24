@@ -1,10 +1,10 @@
 # Full Stack Casting Agency API Capstone Project
 
-This Casting Agency API is a artist and movie managment tool that gives members of a casting company different levels of access to information based on their role in the company.
+Casting Agency API. This is my capstone project for the Full Stack Web Development Nanodegree in Udacity. The Casting Agency models a company that is responsible for creating movies and managing and assigning actors to those movies.
 
 For this project, I used Auth0 for role based access control, built out the data models to power the API endpoints, tested those endpoints by building a Python file and unittest, and then deployed the project to Heroku.
 
-You can see the site live [here](https://fsnd-casting-project.herokuapp.com/)
+You can see the site live [Here](https://fsnd-casting-project.herokuapp.com/)
 
 # Overview
 
