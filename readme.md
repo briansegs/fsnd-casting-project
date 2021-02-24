@@ -56,10 +56,23 @@ This will install all of the required packages we selected within the `requireme
   ├── Procfile *** For Heroku to launch the gunicorn server
   ├── manage.py *** For Heroku to manage migrations
   ├── .gitignore
-  ├── app.py *** the main driver of the app. Includes my SQLAlchemy models.
-  ├── auth.py
+  ├── app.py *** The main driver of the app.
+  ├── auth.py *** Handels authentication and authorization with Flask
+  ├── test_app.py *** Tests all API endpoints
   └── models.py *** Sets up the Database and Models
   ```
+
+Implimented
+-----
+
+  1. Relational Database Architecture in `models.py`.
+  2. Using SQLAlchemy, I set up normalized models for the objects supported in my app in `models.py`.
+  3. Implemented the controllers for my Flask API endpoints in `app.py`.
+  4. Implemented authentication and authorization in Flask in `auth.py`
+  5. Implemented role-based control design patterns in `app.py`
+  6. Testing Flask Application in `test_app.py`
+  7. Deployed Application to Heroku
+
 
 ## Testing
 
@@ -83,8 +96,8 @@ python3 test_app.py
 
 ### Getting Started
 
-- The backend app is hosted on **Heroku** at https://fsnd-casting-project.herokuapp.com/
-- All Endpoints require authentication token except the home endpoint (`/`)
+* The backend app is hosted on Heroku at https://fsnd-casting-project.herokuapp.com/
+* All Endpoints require an authentication token except the home endpoint (`/`)
 
 ## Error Handling
 
@@ -99,19 +112,19 @@ Errors are returned as JSON objects in the following format:
 
 ## API RBAC
 
-Our API have **3** roles :
+Our API has **3** roles :
 
-### Casting Assistant
+1. Casting Assistant
 
 - Can view actors and movies
 
-### Casting Director
+2. Casting Director
 
 - All permissions a Casting Assistant has
 - Add or delete an actor from the database
 - Modify actors or movies
 
-### Executive Producer
+3. Executive Producer
 
 - All permissions a Casting Director has
 - Add or delete a movie from the database
