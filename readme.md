@@ -1,10 +1,19 @@
 # Full Stack Casting Agency API Capstone Project
 
-**Casting Agency** API.
-This is my capstone project for full stack development nanodegree in udacity. The Casting Agency models a company that is responsible for creating movies and managing and assigning actors to those movies.
-you can check it live on **Heroku** [here](https://fsnd-casting-project.herokuapp.com/)
+This Casting Agency API is a artist and movie managment tool that gives members of a casting company different levels of access to information based on their role in the company.
 
-The motivation behind this project is to act as an Executive Producer within this company and create a system to simplify and streamline my process.
+For this project, I used Auth0 for role based access control, built out the data models to power the API endpoints, tested those endpoints by building a Python file and unittest, and then deployed the project to Heroku.
+
+You can see the site live [here](https://fsnd-casting-project.herokuapp.com/)
+
+# Overview
+
+This API is fully functional and is capable of doing the following:
+
+- Creating new movies and artists.
+- Searching for movies and artists.
+- Deleting movies and artists.
+- Editing movies and artists.
 
 ## Getting Started
 
@@ -38,7 +47,18 @@ This will install all of the required packages we selected within the `requireme
 
 [Flask-CORS](https://flask-cors.readthedocs.io/en/latest/#) is the extension we'll use to handle cross origin requests from our frontend server.
 
+## Main Files: Project Structure
 
+  ```sh
+  ├── README.md
+  ├── requirements.txt *** The dependencies you need to install with "pip3 install -r requirements.txt"
+  ├── Procfile *** For Heroku to launch the gunicorn server
+  ├── manage.py *** For Heroku to manage migrations
+  ├── .gitignore
+  ├── app.py *** the main driver of the app. Includes my SQLAlchemy models.
+  ├── auth.py
+  └── models.py *** Sets up the Database and Models
+  ```
 
 ## Testing
 
