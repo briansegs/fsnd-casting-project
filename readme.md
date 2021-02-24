@@ -10,12 +10,13 @@ You can see the site live [here](https://fsnd-casting-project.herokuapp.com/)
 
 This API is fully functional and is capable of doing the following:
 
-- Creating new movies and artists.
-- Searching for movies and artists.
-- Deleting movies and artists.
-- Editing movies and artists.
+* Creating new movies and artists.
+* Searching for movies and artists.
+* Deleting movies and artists.
+* Editing movies and artists.
+* Managing access to endpoints based on role in JWT.
 
-## Getting Started
+## Tech Stack (Dependencies)
 
 ### Pre-requisites and Local Development
 
